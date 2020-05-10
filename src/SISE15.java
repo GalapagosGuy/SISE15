@@ -15,7 +15,7 @@ public class SISE15 {
 
         if (algorithm == null)
             return;
-        
+
         //execute algorithm
 
     }
