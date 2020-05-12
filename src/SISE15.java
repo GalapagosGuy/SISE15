@@ -74,6 +74,22 @@ public class SISE15 {
             System.out.println("No solution was found");
         }
 
+        Board boardForAStar = new Board("");
+        int[] generated = {
+                1, 2, 3, 0,
+                5, 6, 7, 4,
+                9, 11, 12, 8,
+                13, 10, 14, 15,
+        };
+
+        boardForAStar.setEmptyField(3);
+        boardForAStar.setBoardFields(generated);
+        boardForAStar.setHeight(4);
+        boardForAStar.setWidth(4);
+
+        AStar astar = new AStar();
+        astar.solve(boardForAStar);
+
     }
 
     private static void prepareProgram(String[] args) {
