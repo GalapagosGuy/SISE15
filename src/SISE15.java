@@ -23,9 +23,9 @@ public class SISE15 {
 
 
         int[] unsolvedPuzzle = {
-                1,2,4,
-                3,0,5,
-                7,6,8
+                2,3,0,
+                1,4,5,
+                7,8,6
         };
 
         int[] simplePuzzle = {
@@ -49,9 +49,14 @@ public class SISE15 {
                 4,1,3,7,
                 5,6,2,0,
         };
-        Node rootNode = new Node(irregularPuzzle1x4,2,4);
+        Node rootNode = new Node(unsolvedPuzzle,3,3);
         BFS bfs = new BFS();
-        ArrayList<Node> solution = bfs.solve(rootNode);
+        ArrayList<String> moves = new ArrayList<String>();
+        moves.add("Up");
+        moves.add("Down");
+        moves.add("Left");
+        moves.add("Right");
+        ArrayList<Node> solution = bfs.solve(rootNode, moves);
 
         if(solution.size() > 0){
 

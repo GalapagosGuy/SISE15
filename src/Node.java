@@ -40,11 +40,15 @@ public class Node {
     public boolean checkCorectenss(){
         boolean isCorrect = true;
         int current = this.puzzle[0];
-        for (int i = 1; i < puzzle.length ; i++) {
-            if( current > this.puzzle[i])
+        for (int i = 1; i < puzzle.length -1 ; i++) {
+           // if(current == 0 && i == puzzle.length)
+            if(current > this.puzzle[i])
                 isCorrect = false;
             current = this.puzzle[i];
         }
+
+        if(puzzle[puzzle.length-1] != 0)
+            isCorrect = false;
         return isCorrect;
     }
     public boolean isIdentical(int[] p){
@@ -121,18 +125,27 @@ public class Node {
 
         }
     }
-    public void nextLayer(){
+    public void nextLayer(ArrayList<String> moves){
         for (int i = 0; i < puzzle.length ; i++) {
             if (puzzle[i] == 0)
                 zeroPosition = i;
         }
+        for (int i = 0; i < 4; i++) {
+            if(moves.get(i) == "Up")
+                moveUp(puzzle,zeroPosition);
+            else if (moves.get(i) == "Down")
+                moveDown(puzzle,zeroPosition);
+            else if (moves.get(i) == "Left")
+                moveLeft(puzzle,zeroPosition);
+            else if (moves.get(i) == "Right")
+                moveRight(puzzle,zeroPosition);
+
+        }
+        /*
             moveRight(puzzle,zeroPosition);
             moveLeft(puzzle,zeroPosition);
             moveUp(puzzle,zeroPosition);
-            moveDown(puzzle,zeroPosition);
-
-
-
+            moveDown(puzzle,zeroPosition); */
     }
     public void printOutPuzzle(){
         System.out.println();

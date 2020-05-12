@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 public class BFS {
 
-    public ArrayList<Node> solve(Node root){
+    public ArrayList<Node> solve(Node root, ArrayList<String> moves){
         ArrayList<Node> solutionPath = new ArrayList<Node>();
         ArrayList<Node> openList = new ArrayList<Node>();
         ArrayList<Node> closedList = new ArrayList<Node>();
@@ -16,7 +16,7 @@ public class BFS {
             closedList.add(currentNode);
             openList.remove(0);
 
-            currentNode.nextLayer();
+            currentNode.nextLayer(moves);
            // currentNode.printOutPuzzle();
             for (int i = 0; i < currentNode.children.size() ; i++) {
                 Node currentChild = currentNode.children.get(i);
