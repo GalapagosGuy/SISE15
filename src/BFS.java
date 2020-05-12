@@ -3,9 +3,6 @@ import java.util.ArrayList;
 
 public class BFS {
 
-    public BFS(){
-
-    }
     public ArrayList<Node> solve(Node root){
         ArrayList<Node> solutionPath = new ArrayList<Node>();
         ArrayList<Node> openList = new ArrayList<Node>();

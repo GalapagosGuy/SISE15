@@ -39,7 +39,17 @@ public class SISE15 {
             3,0,5,
             6,7,8
         };
-        Node rootNode = new Node(unsolvedPuzzle,3,3);
+        int[] puzzle4x4 = {
+                4,1,2,3,
+                8,5,6,7,
+                9,10,0,11,
+                12,13,14,15
+        };
+        int[] irregularPuzzle1x4 = {
+                4,1,3,7,
+                5,6,2,0,
+        };
+        Node rootNode = new Node(irregularPuzzle1x4,2,4);
         BFS bfs = new BFS();
         ArrayList<Node> solution = bfs.solve(rootNode);
 
