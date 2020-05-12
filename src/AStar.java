@@ -1,4 +1,6 @@
+import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 /* useful links
 https://algorithmsinsight.wordpress.com/graph-theory-2/a-star-in-general/implementing-a-star-to-solve-n-puzzle/
@@ -13,7 +15,11 @@ public class AStar extends Algorithm {
     ArrayList<Node> openList;
     boolean solutionFound = false;
 
+    Stats stats;
+
     public void solve(Board board, String heuristics) {
+        stats = new Stats();
+        long startTime = System.nanoTime();
 
         openList = new ArrayList<Node>();
         useHamming = heuristics.equals("hamm");
@@ -35,6 +41,12 @@ public class AStar extends Algorithm {
 
         System.out.println("Solution:");
         DebugDraw(currentNode);
+
+        stats.time = Math.round((System.nanoTime() - startTime) / 1000.0f) / 1000.0f;
+        System.out.println("Time: " + stats.time);
+        /*stats.time = TimeUnit.NANOSECONDS.toMillis(System.nanoTime() - startTime);
+        System.out.println("Time nano: " + (System.nanoTime() - startTime));
+        System.out.println("Time mili: " + stats.time);*/
     }
 
     private void DebugDraw(Node node) {
