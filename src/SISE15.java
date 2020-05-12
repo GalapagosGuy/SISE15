@@ -88,7 +88,11 @@ public class SISE15 {
         boardForAStar.setWidth(4);
 
         AStar astar = new AStar();
-        astar.solve(boardForAStar);
+        astar.solve(boardForAStar, "hamm");
+
+        System.out.println("Manhattan");
+        astar = new AStar();
+        astar.solve(boardForAStar, "manh");
 
     }
 

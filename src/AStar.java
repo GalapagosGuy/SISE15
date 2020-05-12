@@ -7,9 +7,10 @@ public class AStar extends Algorithm {
     ArrayList<Node> openList;
     boolean solutionFound = false;
 
-    public void solve(Board board) {
+    public void solve(Board board, String heuristics) {
 
         openList = new ArrayList<Node>();
+        useHamming = heuristics.equals("hamm");
 
         Node currentNode = new Node(board.getBoardFields(), board.getWidth(), board.getHeight());
         currentNode.parent = null;
@@ -106,7 +107,34 @@ public class AStar extends Algorithm {
     }
 
     private int manhattanScore(Node node) {
-        return 0;
+
+        int score = 0;
+
+        for (int i = 0; i < node.puzzle.length; i++) {
+            if (node.puzzle[i] == i + 1 || node.puzzle[i] == 0)
+                continue;
+
+            int finalPositionInArray = findFinalPositionInArrayByValue(node, node.puzzle[i]);
+
+            int finalX = (int)(finalPositionInArray / node.rows);
+            int finalY = (int)(finalPositionInArray / node.columns);
+
+            int currentFieldX = (int)(i / node.rows);
+            int currentFieldY = (int)(i / node.columns);
+
+            score += Math.abs(finalX - currentFieldX) + Math.abs(finalY - currentFieldY);
+        }
+
+        return score;
+    }
+
+    private int findFinalPositionInArrayByValue(Node node, int value) {
+        for(int i = 0; i < node.puzzle.length; i++) {
+            if (i == value - 1)
+                return i;
+        }
+
+        return node.puzzle.length - 1;
     }
 
 }
