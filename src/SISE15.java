@@ -29,9 +29,9 @@ public class SISE15 {
 
 
         int[] unsolvedPuzzle = {
-                1,2,4,
-                3,0,5,
-                7,6,8
+                2,3,0,
+                1,4,5,
+                7,8,6
         };
 
         int[] simplePuzzle = {
@@ -45,26 +45,24 @@ public class SISE15 {
             3,0,5,
             6,7,8
         };
-
-        int[] generated = {
-                1, 2, 3, 4,
-                5, 6, 7, 8,
-                10, 13, 11, 12,
-                9, 14, 0, 15,
+        int[] puzzle4x4 = {
+                4,1,2,3,
+                8,5,6,7,
+                9,10,0,11,
+                12,13,14,15
         };
-
-        Board board = new Board("");
-        board.setWidth(4);
-        board.setHeight(4);
-        board.setBoardFields(generated);
-        board.setEmptyField(14);
-
-        AStar astar = new AStar();
-        astar.solve(board);
-
-        /*Node rootNode = new Node(simplePuzzle,3,3);
+        int[] irregularPuzzle1x4 = {
+                4,1,3,7,
+                5,6,2,0,
+        };
+        Node rootNode = new Node(unsolvedPuzzle,3,3);
         BFS bfs = new BFS();
-        ArrayList<Node> solution = bfs.solve(rootNode);
+        ArrayList<String> moves = new ArrayList<String>();
+        moves.add("Up");
+        moves.add("Down");
+        moves.add("Left");
+        moves.add("Right");
+        ArrayList<Node> solution = bfs.solve(rootNode, moves);
 
         if(solution.size() > 0){
 
