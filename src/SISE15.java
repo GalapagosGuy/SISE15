@@ -72,7 +72,7 @@ public class SISE15 {
         }
         else{
             System.out.println("No solution was found");
-        }*/
+        }
 
     }
 

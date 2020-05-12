@@ -149,6 +149,20 @@ public class Node {
             moveUp(puzzle,zeroPosition);
             moveDown(puzzle,zeroPosition); */
     }
+    public void nextLayer(){
+        for (int i = 0; i < puzzle.length ; i++) {
+            if (puzzle[i] == 0)
+                zeroPosition = i;
+        }
+
+        moveRight(puzzle,zeroPosition);
+        moveLeft(puzzle,zeroPosition);
+        moveUp(puzzle,zeroPosition);
+        moveDown(puzzle,zeroPosition);
+
+        for (Node neighbour : children)
+            neighbour.depth = this.depth + 1;
+    }
     public void printOutPuzzle(){
         System.out.println();
         int current = 0;
