@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class SISE15 {
 
     private static String strategyType;
@@ -7,6 +9,7 @@ public class SISE15 {
     private static String resultAdditionalInfoFilePath;
 
     public static void main(String[] args) {
+        /*
         prepareProgram(args);
 
         Board board = new Board(sourceFilePath);
@@ -15,8 +18,40 @@ public class SISE15 {
 
         if (algorithm == null)
             return;
-
+        */
         //execute algorithm
+
+
+        int[] unsolvedPuzzle = {
+                1,2,4,
+                3,0,5,
+                7,6,8
+        };
+
+        int[] simplePuzzle = {
+                0,3,2,
+                6,1,5,
+                7,4,8
+        };
+
+        int[] simplePuzzle2 = {
+            1,4,2,
+            3,0,5,
+            6,7,8
+        };
+        Node rootNode = new Node(unsolvedPuzzle,3,3);
+        BFS bfs = new BFS();
+        ArrayList<Node> solution = bfs.solve(rootNode);
+
+        if(solution.size() > 0){
+
+            for (int i = solution.size() - 1; i >= 0; i--) {
+                solution.get(i).printOutPuzzle();
+            }
+        }
+        else{
+            System.out.println("No solution was found");
+        }
 
     }
 
