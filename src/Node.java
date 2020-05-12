@@ -10,6 +10,8 @@ public class Node {
     public int zeroPosition = 0;
     public int rows;
     public int columns;
+    public int depth = 0;
+    public int heuristicScore = 0;
 
     public Node(int[] unsolvedPuzzle, int rows, int columns){
         puzzle = new int[rows*columns];
@@ -126,12 +128,14 @@ public class Node {
             if (puzzle[i] == 0)
                 zeroPosition = i;
         }
-            moveRight(puzzle,zeroPosition);
-            moveLeft(puzzle,zeroPosition);
-            moveUp(puzzle,zeroPosition);
-            moveDown(puzzle,zeroPosition);
 
+        moveRight(puzzle,zeroPosition);
+        moveLeft(puzzle,zeroPosition);
+        moveUp(puzzle,zeroPosition);
+        moveDown(puzzle,zeroPosition);
 
+        for(Node node : children)
+            node.depth = this.depth + 1;
 
     }
     public void printOutPuzzle(){
@@ -151,5 +155,15 @@ public class Node {
         int temp = a;
         a = b;
         b = temp;
+    }
+
+    public void setZeroPosition() {
+        if (puzzle == null)
+            return;
+
+        for (int i = 0; i < puzzle.length; i++) {
+            if (puzzle[i] == 0)
+                zeroPosition = i;
+        }
     }
 }

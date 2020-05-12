@@ -21,6 +21,12 @@ public class SISE15 {
         */
         //execute algorithm
 
+        int[] patheticPuzzle = {
+                1,2,3,
+                0,5,6,
+                4,7,8
+        };
+
 
         int[] unsolvedPuzzle = {
                 1,2,4,
@@ -29,9 +35,9 @@ public class SISE15 {
         };
 
         int[] simplePuzzle = {
-                0,3,2,
-                6,1,5,
-                7,4,8
+                2,3,0,
+                1,4,5,
+                7,8,6
         };
 
         int[] simplePuzzle2 = {
@@ -39,7 +45,24 @@ public class SISE15 {
             3,0,5,
             6,7,8
         };
-        Node rootNode = new Node(unsolvedPuzzle,3,3);
+
+        int[] generated = {
+                1, 2, 3, 4,
+                5, 6, 7, 8,
+                10, 13, 11, 12,
+                9, 14, 0, 15,
+        };
+
+        Board board = new Board("");
+        board.setWidth(4);
+        board.setHeight(4);
+        board.setBoardFields(generated);
+        board.setEmptyField(14);
+
+        AStar astar = new AStar();
+        astar.solve(board);
+
+        /*Node rootNode = new Node(simplePuzzle,3,3);
         BFS bfs = new BFS();
         ArrayList<Node> solution = bfs.solve(rootNode);
 
@@ -51,7 +74,7 @@ public class SISE15 {
         }
         else{
             System.out.println("No solution was found");
-        }
+        }*/
 
     }
 

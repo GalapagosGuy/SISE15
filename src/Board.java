@@ -4,10 +4,10 @@ import java.util.Scanner;
 
 public class Board {
 
-    int width = 0;
-    int height = 0;
-    int emptyField = 0;
-    int[] boardFields;
+    private int width = 0;
+    private int height = 0;
+    private int emptyField = 0;
+    private int[] boardFields;
 
     public Board(String sourceFilePath) {
         this.prepare(sourceFilePath);
@@ -46,4 +46,35 @@ public class Board {
 
     }
 
+    public int getWidth() {
+        return width;
+    }
+
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
+    public int getEmptyField() {
+        return emptyField;
+    }
+
+    public void setEmptyField(int emptyField) {
+        this.emptyField = emptyField;
+    }
+
+    public int[] getBoardFields() {
+        return boardFields;
+    }
+
+    public void setBoardFields(int[] boardFields) {
+        this.boardFields = boardFields;
+    }
 }
