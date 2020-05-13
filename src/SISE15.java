@@ -18,7 +18,7 @@ public class SISE15 {
     public static void main(String[] args) {
 
         Stats bigStats = new Stats();
-        String fileName = "Puzzles/4x4_05_00001.txt";
+        String fileName = "Puzzles/4x4_01_00001.txt";
         int indexFile = 1;
         int compIndex = 1;
 
@@ -40,7 +40,8 @@ public class SISE15 {
                     return;
 
                 //execute algorithm
-                Stats statsResult = algorithm.solve(board, "hamm");
+                Stats statsResult = algorithm.solve(board, "manh");
+                //System.out.println(statsResult.time);
                 //System.out.println(statsResult.solutionLength);
                 bigStats.solutionLength += statsResult.solutionLength;
                 bigStats.maxRecursion += statsResult.maxRecursion;
@@ -50,7 +51,7 @@ public class SISE15 {
 
                 indexFile++;
 
-                String newFileName = "Puzzles/4x4_05_";
+                String newFileName = "Puzzles/4x4_01_";
                 if (indexFile > 99)
                     newFileName += "00" + indexFile;
                 else if (indexFile > 9)
@@ -65,14 +66,14 @@ public class SISE15 {
             }
 
         indexFile--;
-        float solutionLength = bigStats.solutionLength /= (float)indexFile;
-        float maxRecursion = bigStats.maxRecursion /=  (float)indexFile;
-        float processedNodes = bigStats.processedNodes /=  (float)indexFile;
-        float visitedNodes = bigStats.visitedNodes /=  (float)indexFile;
-        float time = bigStats.time;// /=  (float)indexFile;
+        float solutionLength = bigStats.solutionLength * 1.0f / (float)indexFile;
+        float maxRecursion = bigStats.maxRecursion * 1.0f /  (float)indexFile;
+        float processedNodes = bigStats.processedNodes * 1.0f /  (float)indexFile;
+        float visitedNodes = bigStats.visitedNodes * 1.0f /  (float)indexFile;
+        float time = bigStats.time * 1.0f /  (float)indexFile;
 
         try {
-            FileWriter additionalInfoResult = new FileWriter("4x4_05_astr_hamm_stats.txt");
+            FileWriter additionalInfoResult = new FileWriter("4x4_01_astr_manh_stats.txt");
 
             if (solutionLength == 0 || solutionLength == -1)
                 additionalInfoResult.write("-1");
