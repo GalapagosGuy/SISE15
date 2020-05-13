@@ -18,7 +18,7 @@ public class SISE15 {
     public static void main(String[] args) {
 
         Stats bigStats = new Stats();
-        String fileName = "Puzzles/4x4_01_00001.txt";
+        String fileName = "Puzzles/4x4_07_00001.txt";
         int indexFile = 1;
         int compIndex = 1;
 
@@ -51,7 +51,7 @@ public class SISE15 {
 
                 indexFile++;
 
-                String newFileName = "Puzzles/4x4_01_";
+                String newFileName = "Puzzles/4x4_07_";
                 if (indexFile > 99)
                     newFileName += "00" + indexFile;
                 else if (indexFile > 9)
@@ -73,7 +73,7 @@ public class SISE15 {
         float time = bigStats.time * 1.0f /  (float)indexFile;
 
         try {
-            FileWriter additionalInfoResult = new FileWriter("4x4_01_astr_manh_stats.txt");
+            FileWriter additionalInfoResult = new FileWriter("4x4_07_astr_manh_stats.txt");
 
             if (solutionLength == 0 || solutionLength == -1)
                 additionalInfoResult.write("-1");
