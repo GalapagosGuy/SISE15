@@ -9,6 +9,7 @@ public class DFS extends Algorithm{
         Stats stats = new Stats();
         stats.type +=  getClass().getName() + " ";
         stats.type += strategyParam;
+        stats.maxRecursion = 0;
         ArrayList<String> movesSet = movesConverstion(strategyParam);
         long startTime = System.nanoTime();
         solutionPath = new ArrayList<Node>();
@@ -20,29 +21,30 @@ public class DFS extends Algorithm{
 
         while(openList.size() > 0 && !solutionFound){
             Node currentNode = openList.get(0);
+            for (int i = 0; i < openList.size(); i++) {
+                if(currentNode.depth < openList.get(i).depth)
+                    currentNode = openList.get(i);
+            }
+
             stats.processedNodes++;
             closedList.add(currentNode);
-            openList.remove(0);
+            openList.remove(currentNode);
 
-                currentNode.nextLayer(movesSet);
-            // currentNode.printOutPuzzle();
+            currentNode.nextLayer(movesSet);
+
             for (int i = 0; i < currentNode.children.size() ; i++) {
                 Node currentChild = currentNode.children.get(i);
+                if(currentChild.depth > stats.maxRecursion)
+                    stats.maxRecursion = currentChild.depth;
                 if(currentChild.checkCorectenss()){
                     //System.out.println("Solution found");
                     solutionFound = true;
                    // System.out.println("Depth of solution: " + currentChild.depth);
-                    stats.maxRecursion = currentChild.depth;
+                    //stats.maxRecursion = currentChild.depth;
                     solutionPath(solutionPath, currentChild);
                 }
-                    openList.add(0, currentChild);
+                    openList.add(currentChild);
                     stats.visitedNodes++;
-
-                /*
-                if(!contains(openList, currentChild) && !contains(closedList, currentChild)){
-                    openList.add(0, currentChild);
-                } */
-
             }
         }
         if (solutionPath.size() > 0) {
@@ -55,7 +57,7 @@ public class DFS extends Algorithm{
             stats.solutionLength = solutionMoves.length();
 
             for (int j = solutionPath.size() - 1; j >= 0; j--) {
-                //solution.get(j).printOutPuzzle();
+                solutionPath.get(j).printOutPuzzle();
             }
         } else {
             System.out.println("No solution was found");

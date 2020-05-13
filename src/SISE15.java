@@ -54,26 +54,8 @@ public class SISE15 {
         for (int i = 0; i < 8; i++) {
 
             Stats stats = new Stats();
-
             stats = alg.solve(board, alg.genericMoves[i]);
-            if (alg.solutionPath.size() > 0) {
-                stats.type += alg.getClass() + " ";
-                stats.type += alg.genericMoves[i];
-                String solutionMoves = "";
-                for (int j = alg.solutionPath.size() - 1; j >= 0; j--) {
-                    solutionMoves += alg.solutionPath.get(j).moves;
-                }
-                stats.moves = solutionMoves;
-                stats.solutionLength = solutionMoves.length();
 
-                for (int j = alg.solutionPath.size() - 1; j >= 0; j--) {
-                    //solution.get(j).printOutPuzzle();
-                }
-            } else {
-                System.out.println("No solution was found");
-            }
-            alg.solutionPath.clear();
-            stats.display();
         }
     }
 
