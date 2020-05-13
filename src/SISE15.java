@@ -20,18 +20,18 @@ public class SISE15 {
             return;
         */
         //execute algorithm
-        Board boardForAStar = new Board("Puzzles/4x4_01_00001.txt");
+        Board boardForAStar = new Board("Puzzles/4x4_05_00005.txt");
         int[] puzzle4x4 = {
                 1, 2, 3, 4,
-                5, 6, 7 ,8,
-                10, 13, 11, 12,
-                0, 9, 14, 15,
+                5, 6, 0 ,7,
+                9, 10, 11, 8,
+                13, 14, 15, 12,
         };
-
-
-
-        for (int i = 0; i < 8 ; i++) {
-            Node rootNode = new Node(boardForAStar.getBoardFields(),4,4);
+        boardForAStar.showBoard();
+        float averageTime = 0.0f;
+        for (int i = 0; i < 8; i++) {
+           Node rootNode = new Node(boardForAStar.getBoardFields(),4,4);
+            //Node rootNode = new Node(puzzle4x4,4,4);
             ArrayList<String> moves = new ArrayList<String>();
             if( i == 0)
                 moves = movesConverstion("RDUL");
@@ -51,12 +51,20 @@ public class SISE15 {
                 moves = movesConverstion("ULRD");
 
             DFS dfs = new DFS();
-            ArrayList<Node> solution = dfs.solve(rootNode, moves);
+            Stats stats = dfs.solve(rootNode, moves);
+            averageTime += stats.time;
+            ArrayList<Node> solution = dfs.solutionPath;
 
             if(solution.size() > 0){
+                System.out.println("Proccessed nodes: " + stats.processedNodes);
+                System.out.println("Visited nodes: " + stats.visitedNodes);
+                for (int j = solution.size() - 1; j >= 0; j--) {
+                    System.out.print(solution.get(j).moves);
+                }
+                System.out.println();
 
                 for (int j = solution.size() - 1; j >= 0; j--) {
-                    solution.get(j).printOutPuzzle();
+                   // solution.get(j).printOutPuzzle();
                 }
             }
             else{
@@ -66,6 +74,8 @@ public class SISE15 {
             moves.clear();
 
         }
+        System.out.println("Average Time:" + averageTime/8.0f);
+
         int[] generated = {
                 1, 2, 3, 0,
                 5, 6, 7, 4,

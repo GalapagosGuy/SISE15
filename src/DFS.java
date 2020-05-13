@@ -1,11 +1,15 @@
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Deque;
 
 public class DFS {
 
-    public ArrayList<Node> solve(Node root, ArrayList<String> moves){
+    public ArrayList<Node> solutionPath;
+    public Stats solve(Node root, ArrayList<String> moves){
         Stats stats = new Stats();
+        Deque<String> stack = new ArrayDeque<String>();
         long startTime = System.nanoTime();
-        ArrayList<Node> solutionPath = new ArrayList<Node>();
+        solutionPath = new ArrayList<Node>();
         ArrayList<Node> openList = new ArrayList<Node>();
         ArrayList<Node> closedList = new ArrayList<Node>();
 
@@ -14,10 +18,11 @@ public class DFS {
 
         while(openList.size() > 0 && !solutionFound){
             Node currentNode = openList.get(0);
+            stats.processedNodes++;
             closedList.add(currentNode);
             openList.remove(0);
 
-            currentNode.nextLayer(moves);
+                currentNode.nextLayer(moves);
             // currentNode.printOutPuzzle();
             for (int i = 0; i < currentNode.children.size() ; i++) {
                 Node currentChild = currentNode.children.get(i);
@@ -27,15 +32,19 @@ public class DFS {
                     System.out.println("Depth of solution: " + currentChild.depth);
                     solutionPath(solutionPath, currentChild);
                 }
+                    openList.add(0, currentChild);
+                    stats.visitedNodes++;
+
+                /*
                 if(!contains(openList, currentChild) && !contains(closedList, currentChild)){
                     openList.add(0, currentChild);
-                }
+                } */
 
             }
         }
-        stats.time = Math.round((System.nanoTime() - startTime) / 1000000.0f);
+        stats.time = ((System.nanoTime() - startTime) / 1000000.0f);
         System.out.println("Time: " + stats.time);
-        return solutionPath;
+        return stats;
     }
     public boolean contains(ArrayList<Node> list, Node n){
         boolean contains = false;
@@ -53,6 +62,8 @@ public class DFS {
 
         path.add(currentNode);
         while(currentNode.parent != null){
+            //System.out.print(currentNode.moves + " ");
+            //System.out.println();
             currentNode = currentNode.parent;
             path.add(currentNode);
         }

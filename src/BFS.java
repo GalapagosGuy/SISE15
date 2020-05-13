@@ -2,11 +2,12 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class BFS {
+    ArrayList<Node> solutionPath;
 
-    public ArrayList<Node> solve(Node root, ArrayList<String> moves){
+    public Stats solve(Node root, ArrayList<String> moves){
         Stats stats = new Stats();
         long startTime = System.nanoTime();
-        ArrayList<Node> solutionPath = new ArrayList<Node>();
+        solutionPath = new ArrayList<Node>();
         ArrayList<Node> openList = new ArrayList<Node>();
         ArrayList<Node> closedList = new ArrayList<Node>();
 
@@ -16,6 +17,7 @@ public class BFS {
         while(openList.size() > 0 && !solutionFound){
             Node currentNode = openList.get(0);
             closedList.add(currentNode);
+            stats.processedNodes++;
             openList.remove(0);
 
             currentNode.nextLayer(moves);
@@ -30,13 +32,14 @@ public class BFS {
                 }
                 if(!contains(openList, currentChild) && !contains(closedList, currentChild)){
                     openList.add(currentChild);
+                    stats.visitedNodes++;
                 }
 
             }
         }
-        stats.time = Math.round((System.nanoTime() - startTime) / 1000.0f) / 1000.0f;
+        stats.time = (System.nanoTime() - startTime) / 1000.0f / 1000.0f;
         System.out.println("Time: " + stats.time);
-        return solutionPath;
+        return stats;
     }
 
     public boolean contains(ArrayList<Node> list, Node n){
@@ -51,7 +54,6 @@ public class BFS {
     }
 
    public void solutionPath(ArrayList<Node> path, Node node){
-       //System.out.println("-- Solution path --");
        Node currentNode = node;
 
        path.add(currentNode);

@@ -77,4 +77,17 @@ public class Board {
     public void setBoardFields(int[] boardFields) {
         this.boardFields = boardFields;
     }
+
+    public void showBoard(){
+        System.out.println();
+        int current = 0;
+        for (int i = 0; i < width ; i++) {
+            for (int j = 0; j < height ; j++) {
+                System.out.print(boardFields[current] + " ");
+                current ++;
+            }
+            System.out.println();
+
+        }
+    }
 }

@@ -13,6 +13,7 @@ public class Node {
     public int depth = 0;
     public int heuristicScore = 0;
     public int maxDepth = 20;
+    public String moves = "";
 
     public Node(int[] unsolvedPuzzle, int rows, int columns){
         puzzle = new int[rows*columns];
@@ -74,6 +75,7 @@ public class Node {
            // swap(tempPuzzle[i-columns], tempPuzzle[i]);
 
             Node child = new Node(tempPuzzle, this.rows, this.columns);
+            child.moves = "U";
             children.add(child);
             child.parent = this;
 
@@ -90,6 +92,7 @@ public class Node {
             //swap(tempPuzzle[i+columns], tempPuzzle[i]);
 
             Node child = new Node(tempPuzzle, this.rows, this.columns);
+            child.moves = "D";
             children.add(child);
             child.parent = this;
 
@@ -106,6 +109,7 @@ public class Node {
             //swap(tempPuzzle[i-1], tempPuzzle[i]);
 
             Node child = new Node(tempPuzzle, this.rows, this.columns);
+            child.moves = "L";
             children.add(child);
             child.parent = this;
 
@@ -123,6 +127,7 @@ public class Node {
             //swap(tempPuzzle[i+1], tempPuzzle[i]);
 
             Node child = new Node(tempPuzzle, this.rows, this.columns);
+            child.moves = "R";
             this.children.add(child);
             child.parent = this;
 
