@@ -20,61 +20,51 @@ public class SISE15 {
             return;
         */
         //execute algorithm
-
-        int[] patheticPuzzle = {
-                1,2,3,
-                0,5,6,
-                4,7,8
-        };
-
-
-        int[] unsolvedPuzzle = {
-                2,3,0,
-                1,4,5,
-                7,8,6
-        };
-
-        int[] simplePuzzle = {
-                2,3,0,
-                1,4,5,
-                7,8,6
-        };
-
-        int[] simplePuzzle2 = {
-            1,4,2,
-            3,0,5,
-            6,7,8
-        };
+        Board boardForAStar = new Board("Puzzles/4x4_01_00001.txt");
         int[] puzzle4x4 = {
                 1, 2, 3, 4,
                 5, 6, 7 ,8,
                 10, 13, 11, 12,
                 0, 9, 14, 15,
         };
-        int[] irregularPuzzle1x4 = {
-                4,1,3,7,
-                5,6,2,0,
-        };
-        Node rootNode = new Node(puzzle4x4,4,4);
-        DFS bfs = new DFS();
-        ArrayList<String> moves = new ArrayList<String>();
-        moves.add("Right");
-        moves.add("Up");
-        moves.add("Down");
-        moves.add("Left");
-        ArrayList<Node> solution = bfs.solve(rootNode, moves);
 
-        if(solution.size() > 0){
 
-            for (int i = solution.size() - 1; i >= 0; i--) {
-                solution.get(i).printOutPuzzle();
+        Node rootNode = new Node(boardForAStar.getBoardFields(),4,4);
+        for (int i = 0; i < 8 ; i++) {
+            ArrayList<String> moves = new ArrayList<String>();
+            if( i == 0)
+                moves = movesConverstion("RDUL");
+            if( i == 1)
+                moves = movesConverstion("RDLU");
+            if( i == 2)
+                moves = movesConverstion("DRUL");
+            if( i == 3)
+                moves = movesConverstion("DRLU");
+            if( i == 4)
+                moves = movesConverstion("LUDR");
+            if( i == 5)
+                moves = movesConverstion("LURD");
+            if( i == 6)
+                moves = movesConverstion("ULDR");
+            if( i == 7)
+                moves = movesConverstion("ULRD");
+
+            DFS bfs = new DFS();
+            ArrayList<Node> solution = bfs.solve(rootNode, moves);
+
+            if(solution.size() > 0){
+
+                for (int j = solution.size() - 1; j >= 0; j--) {
+                    solution.get(j).printOutPuzzle();
+                }
             }
-        }
-        else{
-            System.out.println("No solution was found");
-        }
+            else{
+                System.out.println("No solution was found");
+            }
+            solution.clear();
+            moves.clear();
 
-        Board boardForAStar = new Board("");
+        }
         int[] generated = {
                 1, 2, 3, 0,
                 5, 6, 7, 4,
@@ -116,6 +106,21 @@ public class SISE15 {
         }
 
         return null;
+    }
+    public static ArrayList<String> movesConverstion(String moves){
+        ArrayList<String> arrayMoves = new ArrayList<>();
+        for (int i = 0; i < moves.length(); i++) {
+            if(moves.toUpperCase().charAt(i) == 'R')
+                arrayMoves.add("Right");
+            if(moves.toUpperCase().charAt(i) == 'L')
+                arrayMoves.add("Left");
+            if(moves.toUpperCase().charAt(i) == 'U')
+                arrayMoves.add("Up");
+            if(moves.toUpperCase().charAt(i) == 'D')
+                arrayMoves.add("Down");
+
+        }
+        return arrayMoves;
     }
 
 }
