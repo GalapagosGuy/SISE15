@@ -65,7 +65,7 @@ public class Node {
         return isIdentical;
     }
     public void moveUp(int[] p, int i){
-        if(i - columns >= 0){
+        if(i - columns >= 0 && this.moves != "D"){
             int[] tempPuzzle = new int[rows*columns];
             copyArrays(tempPuzzle, p);
 
@@ -83,7 +83,7 @@ public class Node {
     }
 
     public void moveDown(int[] p, int i){
-        if(i + columns < puzzle.length){
+        if(i + columns < puzzle.length &&  this.moves != "U"){
             int[] tempPuzzle = new int[rows*columns];
             copyArrays(tempPuzzle, p);
             int temp = tempPuzzle[i+columns];
@@ -100,7 +100,7 @@ public class Node {
     }
 
     public void moveLeft(int[] p, int i){
-        if(i % columns > 0){
+        if(i % columns > 0 && this.moves != "R"){
             int[] tempPuzzle = new int[rows*columns];
             copyArrays(tempPuzzle, p);
             int temp = tempPuzzle[i-1];
@@ -117,7 +117,7 @@ public class Node {
     }
 
     public void moveRight(int[] p, int i){
-        if(i % columns < columns - 1){
+        if(i % columns < columns - 1 &&  this.moves != "L"){
             int[] tempPuzzle = new int[rows*columns];
             copyArrays(tempPuzzle, p);
 

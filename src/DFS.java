@@ -57,7 +57,7 @@ public class DFS extends Algorithm{
             stats.solutionLength = solutionMoves.length();
 
             for (int j = solutionPath.size() - 1; j >= 0; j--) {
-                solutionPath.get(j).printOutPuzzle();
+                //solutionPath.get(j).printOutPuzzle();
             }
         } else {
             System.out.println("No solution was found");
