@@ -23,7 +23,6 @@ public abstract class Algorithm {
 
 
         }
-        System.out.println(arrayMoves);
         return arrayMoves;
     }
 }
