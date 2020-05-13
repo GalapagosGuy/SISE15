@@ -23,6 +23,7 @@ public class AStar extends Algorithm {
 
         openList = new ArrayList<Node>();
         useHamming = heuristics.equals("hamm");
+        stats.type = heuristics;
 
         Node currentNode = new Node(board.getBoardFields(), board.getWidth(), board.getHeight());
         currentNode.parent = null;

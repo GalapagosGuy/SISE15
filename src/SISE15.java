@@ -43,7 +43,8 @@ public class SISE15 {
             ArrayList<Node> solution = dfs.solutionPath;
 
             if (solution.size() > 0) {
-                stats.movesSet = genericMoves[i];
+                stats.type += dfs.getClass() + " ";
+                stats.type += genericMoves[i];
                 String solutionMoves = "";
                 for (int j = solution.size() - 1; j >= 0; j--) {
                     solutionMoves += solution.get(j).moves;
