@@ -12,6 +12,7 @@ public class Node {
     public int columns;
     public int depth = 0;
     public int heuristicScore = 0;
+    public int maxDepth = 20;
 
     public Node(int[] unsolvedPuzzle, int rows, int columns){
         puzzle = new int[rows*columns];
@@ -128,20 +129,24 @@ public class Node {
         }
     }
     public void nextLayer(ArrayList<String> moves){
-        for (int i = 0; i < puzzle.length ; i++) {
-            if (puzzle[i] == 0)
-                zeroPosition = i;
-        }
-        for (int i = 0; i < 4; i++) {
-            if(moves.get(i) == "Up")
-                moveUp(puzzle,zeroPosition);
-            else if (moves.get(i) == "Down")
-                moveDown(puzzle,zeroPosition);
-            else if (moves.get(i) == "Left")
-                moveLeft(puzzle,zeroPosition);
-            else if (moves.get(i) == "Right")
-                moveRight(puzzle,zeroPosition);
+        if(this.depth < maxDepth) {
+            for (int i = 0; i < puzzle.length; i++) {
+                if (puzzle[i] == 0)
+                    zeroPosition = i;
+            }
+            for (int i = 0; i < 4; i++) {
+                if (moves.get(i) == "Up")
+                    moveUp(puzzle, zeroPosition);
+                else if (moves.get(i) == "Down")
+                    moveDown(puzzle, zeroPosition);
+                else if (moves.get(i) == "Left")
+                    moveLeft(puzzle, zeroPosition);
+                else if (moves.get(i) == "Right")
+                    moveRight(puzzle, zeroPosition);
 
+            }
+            for (Node neighbour : children)
+                neighbour.depth = this.depth + 1;
         }
         /*
             moveRight(puzzle,zeroPosition);

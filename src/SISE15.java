@@ -46,22 +46,22 @@ public class SISE15 {
             6,7,8
         };
         int[] puzzle4x4 = {
-                4,1,2,3,
-                8,5,6,7,
-                9,10,0,11,
-                12,13,14,15
+                1, 2, 3, 4,
+                5, 6, 7 ,8,
+                10, 13, 11, 12,
+                0, 9, 14, 15,
         };
         int[] irregularPuzzle1x4 = {
                 4,1,3,7,
                 5,6,2,0,
         };
-        Node rootNode = new Node(unsolvedPuzzle,3,3);
-        BFS bfs = new BFS();
+        Node rootNode = new Node(puzzle4x4,4,4);
+        DFS bfs = new DFS();
         ArrayList<String> moves = new ArrayList<String>();
+        moves.add("Right");
         moves.add("Up");
         moves.add("Down");
         moves.add("Left");
-        moves.add("Right");
         ArrayList<Node> solution = bfs.solve(rootNode, moves);
 
         if(solution.size() > 0){

@@ -1,7 +1,6 @@
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-public class BFS {
+public class DFS {
 
     public ArrayList<Node> solve(Node root, ArrayList<String> moves){
         Stats stats = new Stats();
@@ -19,7 +18,7 @@ public class BFS {
             openList.remove(0);
 
             currentNode.nextLayer(moves);
-           // currentNode.printOutPuzzle();
+            // currentNode.printOutPuzzle();
             for (int i = 0; i < currentNode.children.size() ; i++) {
                 Node currentChild = currentNode.children.get(i);
                 if(currentChild.checkCorectenss()){
@@ -29,16 +28,15 @@ public class BFS {
                     solutionPath(solutionPath, currentChild);
                 }
                 if(!contains(openList, currentChild) && !contains(closedList, currentChild)){
-                    openList.add(currentChild);
+                    openList.add(0, currentChild);
                 }
 
             }
         }
-        stats.time = Math.round((System.nanoTime() - startTime) / 1000.0f) / 1000.0f;
+        stats.time = Math.round((System.nanoTime() - startTime) / 1000000.0f);
         System.out.println("Time: " + stats.time);
         return solutionPath;
     }
-
     public boolean contains(ArrayList<Node> list, Node n){
         boolean contains = false;
 
@@ -49,15 +47,15 @@ public class BFS {
 
         return contains;
     }
+    public void solutionPath(ArrayList<Node> path, Node node){
+        //System.out.println("-- Solution path --");
+        Node currentNode = node;
 
-   public void solutionPath(ArrayList<Node> path, Node node){
-       //System.out.println("-- Solution path --");
-       Node currentNode = node;
-
-       path.add(currentNode);
-       while(currentNode.parent != null){
-           currentNode = currentNode.parent;
-           path.add(currentNode);
-       }
-   }
+        path.add(currentNode);
+        while(currentNode.parent != null){
+            currentNode = currentNode.parent;
+            path.add(currentNode);
+        }
+    }
 }
+
