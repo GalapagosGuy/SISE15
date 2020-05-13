@@ -140,13 +140,13 @@ public class Node {
                     zeroPosition = i;
             }
             for (int i = 0; i < 4; i++) {
-                if (moves.get(i) == "Up")
+                if (moves.get(i).equals("Up"))
                     moveUp(puzzle, zeroPosition);
-                else if (moves.get(i) == "Down")
+                else if (moves.get(i).equals("Down"))
                     moveDown(puzzle, zeroPosition);
-                else if (moves.get(i) == "Left")
+                else if (moves.get(i).equals("Left"))
                     moveLeft(puzzle, zeroPosition);
-                else if (moves.get(i) == "Right")
+                else if (moves.get(i).equals("Right"))
                     moveRight(puzzle, zeroPosition);
 
             }
@@ -164,7 +164,6 @@ public class Node {
             if (puzzle[i] == 0)
                 zeroPosition = i;
         }
-
         moveRight(puzzle,zeroPosition);
         moveLeft(puzzle,zeroPosition);
         moveUp(puzzle,zeroPosition);

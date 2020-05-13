@@ -20,7 +20,10 @@ public abstract class Algorithm {
             if(moves.toUpperCase().charAt(i) == 'D')
                 arrayMoves.add("Down");
 
+
+
         }
+        System.out.println(arrayMoves);
         return arrayMoves;
     }
 }

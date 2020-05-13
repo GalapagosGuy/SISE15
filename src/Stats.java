@@ -58,7 +58,7 @@ public class Stats {
                 additionalInfoResult.write(processedNodes + "\n");
                 additionalInfoResult.write(maxRecursion + "\n");
 
-                DecimalFormat df = new DecimalFormat("#.####");
+                DecimalFormat df = new DecimalFormat("#.###");
                 //df.setRoundingMode(RoundingMode.CEILING);
 
                 additionalInfoResult.write(df.format(time));
