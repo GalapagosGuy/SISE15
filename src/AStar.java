@@ -171,12 +171,21 @@ public class AStar extends Algorithm {
 
         int iterator = 0;
         Node previousNode = lastNode.parent;
+        StringBuilder sb = new StringBuilder();
 
         while(previousNode != null) {
             iterator++;
+            sb.append(previousNode.moves);
             previousNode = previousNode.parent;
         }
 
+        String tmp = sb.toString();
+
+        sb = new StringBuilder();
+        for (int i = tmp.length() - 1; i >= 0; i--)
+            sb.append(tmp.charAt(i));
+
+        stats.moves = sb.toString();
         stats.solutionLength = iterator;
 
     }

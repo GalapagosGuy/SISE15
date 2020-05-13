@@ -20,7 +20,7 @@ public class SISE15 {
             return;
         */
         //execute algorithm
-        Board boardForAStar = new Board("Puzzles/4x4_07_00150.txt");
+        Board boardForAStar = new Board("Puzzles/4x4_07_00155.txt");
         int[] puzzle4x4 = {
                 1, 2, 3, 4,
                 5, 6, 0 ,7,
