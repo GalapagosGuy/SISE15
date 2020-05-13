@@ -33,6 +33,7 @@ public class SISE15 {
                 //prepareProgram(args);
 
                 Board board = new Board(fileName);
+                //board.showBoard();
 
                 Algorithm algorithm = prepareAlgorithm("astr");
 
@@ -40,7 +41,7 @@ public class SISE15 {
                     return;
 
                 //execute algorithm
-                Stats statsResult = algorithm.solve(board, "manh");
+                Stats statsResult = algorithm.solve(new Board(fileName), "hamm");
                 //System.out.println(statsResult.time);
                 //System.out.println(statsResult.solutionLength);
                 bigStats.solutionLength += statsResult.solutionLength;
@@ -50,6 +51,8 @@ public class SISE15 {
                 bigStats.time += statsResult.time;
 
                 indexFile++;
+
+
 
                 String newFileName = "Puzzles/4x4_07_";
                 if (indexFile > 99)
@@ -61,6 +64,7 @@ public class SISE15 {
 
                 newFileName += ".txt";
 
+                fileName = newFileName;
                 file = new File(newFileName);
                 System.out.println(newFileName);
             }
@@ -73,7 +77,7 @@ public class SISE15 {
         float time = bigStats.time * 1.0f /  (float)indexFile;
 
         try {
-            FileWriter additionalInfoResult = new FileWriter("4x4_07_astr_manh_stats.txt");
+            FileWriter additionalInfoResult = new FileWriter("4x4_07_astr_hamm_stats.txt");
 
             if (solutionLength == 0 || solutionLength == -1)
                 additionalInfoResult.write("-1");

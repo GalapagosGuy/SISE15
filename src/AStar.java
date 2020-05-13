@@ -11,6 +11,7 @@ public class AStar  extends  Algorithm{
     public boolean useHamming = true;
 
     ArrayList<Node> openList;
+    ArrayList<Node> closedList;
     boolean solutionFound = false;
 
     Stats stats;
@@ -20,6 +21,7 @@ public class AStar  extends  Algorithm{
         long startTime = System.nanoTime();
 
         openList = new ArrayList<Node>();
+        closedList = new ArrayList<Node>();
         useHamming = heuristics.equals("hamm");
         stats.type = heuristics;
 
@@ -36,6 +38,7 @@ public class AStar  extends  Algorithm{
             checkNode(currentNode);
 
             openList.remove(currentNode);
+            closedList.add(currentNode);
         }
 
         if (solutionFound)
@@ -105,9 +108,13 @@ public class AStar  extends  Algorithm{
 
     private void processNode(Node node) {
 
-        if (node != null) {
+        if (node != null && !contains(closedList, node)) {
 
-            node.heuristicScore = node.depth;
+            node.heuristicScore = 0;
+
+            //if (useHamming)
+            //    node.heuristicScore = node.depth;
+
             node.heuristicScore += useHamming ? hammingScore(node) : manhattanScore(node);
 
             openList.add(node);
@@ -115,6 +122,17 @@ public class AStar  extends  Algorithm{
             stats.visitedNodes++;
         }
 
+    }
+
+    public boolean contains(ArrayList<Node> list, Node n){
+        boolean contains = false;
+
+        for (int i = 0; i < list.size() ; i++) {
+            if(list.get(i).isIdentical(n.puzzle))
+                contains = true;
+        }
+
+        return contains;
     }
 
     private int hammingScore(Node node) {
@@ -169,6 +187,7 @@ public class AStar  extends  Algorithm{
         StringBuilder sb = new StringBuilder();
 
         while(previousNode.parent != null) {
+            //previousNode.printOutPuzzle();
             iterator++;
             sb.append(previousNode.moves);
             previousNode = previousNode.parent;
