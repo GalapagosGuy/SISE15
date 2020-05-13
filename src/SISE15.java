@@ -1,4 +1,11 @@
+import javax.sound.midi.Soundbank;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.sql.SQLOutput;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class SISE15 {
 
@@ -10,19 +17,90 @@ public class SISE15 {
 
     public static void main(String[] args) {
 
-        prepareProgram(args);
+        Stats bigStats = new Stats();
+        String fileName = "Puzzles/4x4_05_00001.txt";
+        int indexFile = 1;
+        int compIndex = 1;
 
-        Board board = new Board(sourceFilePath);
 
-        Algorithm algorithm = prepareAlgorithm(strategyType);
+        //try {
 
-        if (algorithm == null)
-            return;
+            File file = new File(fileName);
+            //Scanner scanner = new Scanner(new File(sourceFilePath));
 
-        //execute algorithm
-        Stats statsResult = algorithm.solve(board, strategyParam);
+            while(file.exists()) {
 
-        statsResult.executeResultsToFile(resultFilePath, resultAdditionalInfoFilePath);
+                //prepareProgram(args);
+
+                Board board = new Board(fileName);
+
+                Algorithm algorithm = prepareAlgorithm("astr");
+
+                if (algorithm == null)
+                    return;
+
+                //execute algorithm
+                Stats statsResult = algorithm.solve(board, "hamm");
+                //System.out.println(statsResult.solutionLength);
+                bigStats.solutionLength += statsResult.solutionLength;
+                bigStats.maxRecursion += statsResult.maxRecursion;
+                bigStats.processedNodes += statsResult.processedNodes;
+                bigStats.visitedNodes += statsResult.visitedNodes;
+                bigStats.time += statsResult.time;
+
+                indexFile++;
+
+                String newFileName = "Puzzles/4x4_05_";
+                if (indexFile > 99)
+                    newFileName += "00" + indexFile;
+                else if (indexFile > 9)
+                    newFileName += "000" + indexFile;
+                else
+                    newFileName += "0000" + indexFile;
+
+                newFileName += ".txt";
+
+                file = new File(newFileName);
+                System.out.println(newFileName);
+            }
+
+        indexFile--;
+        float solutionLength = bigStats.solutionLength /= (float)indexFile;
+        float maxRecursion = bigStats.maxRecursion /=  (float)indexFile;
+        float processedNodes = bigStats.processedNodes /=  (float)indexFile;
+        float visitedNodes = bigStats.visitedNodes /=  (float)indexFile;
+        float time = bigStats.time;// /=  (float)indexFile;
+
+        try {
+            FileWriter additionalInfoResult = new FileWriter("4x4_05_astr_hamm_stats.txt");
+
+            if (solutionLength == 0 || solutionLength == -1)
+                additionalInfoResult.write("-1");
+            else {
+                additionalInfoResult.write(solutionLength + "\n");
+                additionalInfoResult.write(visitedNodes + "\n");
+                additionalInfoResult.write(processedNodes + "\n");
+                additionalInfoResult.write(maxRecursion + "\n");
+
+                DecimalFormat df = new DecimalFormat("#.###");
+                //df.setRoundingMode(RoundingMode.CEILING);
+
+                additionalInfoResult.write(df.format(time));
+            }
+
+            additionalInfoResult.close();
+
+        } catch (IOException e) {
+            System.out.println("Writing to file (additional info result) failed!");
+        }
+
+        //bigStats.executeResultsToFile("4x4_01_astar_hamm.txt", "4x4_01_astar_hamm_stats.txt");
+
+        /*} catch (IOException io) {
+            System.out.println("XD");
+        }*/
+
+
 
     }
 
