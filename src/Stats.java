@@ -19,6 +19,7 @@ public class Stats {
         System.out.println("Max recursion: " + maxRecursion);
         System.out.println("Time: " + time);
         System.out.println("----------------");
+        System.out.println();
 
     }
 }

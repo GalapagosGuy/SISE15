@@ -8,7 +8,7 @@ https://blog.goodaudience.com/solving-8-puzzle-using-a-algorithm-7b509c331288
 http://csis.pace.edu/~benjamin/teaching/cs627/webfiles/Astar.pdf
  */
 
-public class AStar extends Algorithm {
+public class AStar  extends  Algorithm{
 
     public boolean useHamming = true;
 
@@ -17,7 +17,7 @@ public class AStar extends Algorithm {
 
     Stats stats;
 
-    public void solve(Board board, String heuristics) {
+    public Stats solve(Board board, String heuristics) {
         stats = new Stats();
         long startTime = System.nanoTime();
 
@@ -55,6 +55,7 @@ public class AStar extends Algorithm {
         /*stats.time = TimeUnit.NANOSECONDS.toMillis(System.nanoTime() - startTime);
         System.out.println("Time nano: " + (System.nanoTime() - startTime));
         System.out.println("Time mili: " + stats.time);*/
+        return stats;
     }
 
     private void DebugDraw(Node node) {

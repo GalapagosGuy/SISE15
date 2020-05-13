@@ -2,17 +2,17 @@ import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Deque;
 
-public class DFS {
+public class DFS extends Algorithm{
 
-    public ArrayList<Node> solutionPath;
-    public Stats solve(Node root, ArrayList<String> moves){
+
+    public Stats solve(Board unsolvedBoard, String strategyParam){
         Stats stats = new Stats();
-        Deque<String> stack = new ArrayDeque<String>();
+        ArrayList<String> movesSet = movesConverstion(strategyParam);
         long startTime = System.nanoTime();
         solutionPath = new ArrayList<Node>();
         ArrayList<Node> openList = new ArrayList<Node>();
         ArrayList<Node> closedList = new ArrayList<Node>();
-
+        Node root = new Node(unsolvedBoard.getBoardFields(), unsolvedBoard.getHeight(), unsolvedBoard.getWidth());
         openList.add(root);
         boolean solutionFound = false;
 
@@ -22,7 +22,7 @@ public class DFS {
             closedList.add(currentNode);
             openList.remove(0);
 
-                currentNode.nextLayer(moves);
+                currentNode.nextLayer(movesSet);
             // currentNode.printOutPuzzle();
             for (int i = 0; i < currentNode.children.size() ; i++) {
                 Node currentChild = currentNode.children.get(i);

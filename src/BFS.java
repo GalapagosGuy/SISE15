@@ -1,16 +1,18 @@
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-public class BFS {
-    ArrayList<Node> solutionPath;
+public class BFS extends  Algorithm{
 
-    public Stats solve(Node root, ArrayList<String> moves){
+
+    public Stats solve(Board unsolvedBoard, String strategyParam){
         Stats stats = new Stats();
+        ArrayList<String> movesSet = movesConverstion(strategyParam);
+
         long startTime = System.nanoTime();
         solutionPath = new ArrayList<Node>();
         ArrayList<Node> openList = new ArrayList<Node>();
         ArrayList<Node> closedList = new ArrayList<Node>();
-
+        Node root = new Node(unsolvedBoard.getBoardFields(), unsolvedBoard.getHeight(), unsolvedBoard.getWidth());
         openList.add(root);
         boolean solutionFound = false;
 
@@ -20,14 +22,11 @@ public class BFS {
             stats.processedNodes++;
             openList.remove(0);
 
-            currentNode.nextLayer(moves);
-           // currentNode.printOutPuzzle();
+            currentNode.nextLayer(movesSet);
             for (int i = 0; i < currentNode.children.size() ; i++) {
                 Node currentChild = currentNode.children.get(i);
                 if(currentChild.checkCorectenss()){
-                    //System.out.println("Solution found");
                     solutionFound = true;
-                    //System.out.println("Depth of solution: " + currentChild.depth);
                     stats.maxRecursion = currentChild.depth;
                     solutionPath(solutionPath, currentChild);
                 }
@@ -38,6 +37,7 @@ public class BFS {
 
             }
         }
+
         stats.time = (System.nanoTime() - startTime) / 1000.0f / 1000.0f;
         //System.out.println("Time: " + stats.time);
         return stats;
