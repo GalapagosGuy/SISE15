@@ -18,7 +18,7 @@ public class SISE15 {
     public static void main(String[] args) {
 
         Stats bigStats = new Stats();
-        String fileName = "Puzzles/4x4_07_00001.txt";
+        String fileName = "Puzzles/4x4_01_00001.txt";
         int indexFile = 1;
         int compIndex = 1;
 
@@ -41,7 +41,7 @@ public class SISE15 {
                     return;
 
                 //execute algorithm
-                Stats statsResult = algorithm.solve(new Board(fileName), "RDUL");
+                Stats statsResult = algorithm.solve(new Board(fileName), "RDLU");
                 //System.out.println(statsResult.time);
                 //System.out.println(statsResult.solutionLength);
                 bigStats.solutionLength += statsResult.solutionLength;
@@ -54,7 +54,7 @@ public class SISE15 {
 
 
 
-                String newFileName = "Puzzles/4x4_07_";
+                String newFileName = "Puzzles/4x4_01_";
                 if (indexFile > 99)
                     newFileName += "00" + indexFile;
                 else if (indexFile > 9)
@@ -77,7 +77,7 @@ public class SISE15 {
         float time = bigStats.time * 1.0f /  (float)indexFile;
 
         try {
-            FileWriter additionalInfoResult = new FileWriter("4x4_07_dfs_RDUL_stats.txt");
+            FileWriter additionalInfoResult = new FileWriter("4x4_01_dfs_RDLU_stats.txt");
 
             if (solutionLength == 0 || solutionLength == -1)
                 additionalInfoResult.write("-1");
