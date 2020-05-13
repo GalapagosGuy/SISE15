@@ -1,6 +1,4 @@
-import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.concurrent.TimeUnit;
 
 /* useful links
 https://algorithmsinsight.wordpress.com/graph-theory-2/a-star-in-general/implementing-a-star-to-solve-n-puzzle/
@@ -45,16 +43,11 @@ public class AStar  extends  Algorithm{
         else
             stats.solutionLength = -1;
 
-        //System.out.println("Solution:");
-        //DebugDraw(currentNode);
 
         stats.time = (System.nanoTime() - startTime) / 1000.0f / 1000.0f;
-        //System.out.println("Time: " + stats.time);
 
-        stats.display();
-        /*stats.time = TimeUnit.NANOSECONDS.toMillis(System.nanoTime() - startTime);
-        System.out.println("Time nano: " + (System.nanoTime() - startTime));
-        System.out.println("Time mili: " + stats.time);*/
+        //stats.display();
+
         return stats;
     }
 
