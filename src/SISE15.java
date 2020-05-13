@@ -20,33 +20,9 @@ public class SISE15 {
             return;
 
         //execute algorithm
-        algorithm.solve(board, strategyParam);
-        /*
-        Board boardForAStar = new Board("Puzzles/4x4_05_00001.txt");
-        int[] puzzle4x4 = {
-                1, 2, 3, 4,
-                5, 6, 0 ,7,
-                9, 10, 11, 8,
-                13, 14, 15, 12,
-        };
+        Stats statsResult = algorithm.solve(board, strategyParam);
 
-
-        float averageTime = 0.0f;
-
-        DFS dfs = new DFS();
-        solve8(dfs, boardForAStar);
-
-        BFS bfs = new BFS();
-        solve8(bfs, boardForAStar);
-
-
-        AStar astar = new AStar();
-        astar.solve(boardForAStar, "hamm");
-
-        astar = new AStar();
-        astar.solve(boardForAStar, "manh");
-        */
-
+        statsResult.executeResultsToFile(resultFilePath, resultAdditionalInfoFilePath);
 
     }
 
