@@ -7,6 +7,8 @@ public class DFS extends Algorithm{
 
     public Stats solve(Board unsolvedBoard, String strategyParam){
         Stats stats = new Stats();
+        stats.type +=  getClass().getName() + " ";
+        stats.type += strategyParam;
         ArrayList<String> movesSet = movesConverstion(strategyParam);
         long startTime = System.nanoTime();
         solutionPath = new ArrayList<Node>();
@@ -43,7 +45,23 @@ public class DFS extends Algorithm{
 
             }
         }
+        if (solutionPath.size() > 0) {
+
+            String solutionMoves = "";
+            for (int j = solutionPath.size() - 1; j >= 0; j--) {
+                solutionMoves += solutionPath.get(j).moves;
+            }
+            stats.moves = solutionMoves;
+            stats.solutionLength = solutionMoves.length();
+
+            for (int j = solutionPath.size() - 1; j >= 0; j--) {
+                //solution.get(j).printOutPuzzle();
+            }
+        } else {
+            System.out.println("No solution was found");
+        }
         stats.time = ((System.nanoTime() - startTime) / 1000000.0f);
+        stats.display();
         //System.out.println("Time: " + stats.time);
         return stats;
     }
