@@ -27,9 +27,10 @@ public class DFS {
             for (int i = 0; i < currentNode.children.size() ; i++) {
                 Node currentChild = currentNode.children.get(i);
                 if(currentChild.checkCorectenss()){
-                    System.out.println("Solution found");
+                    //System.out.println("Solution found");
                     solutionFound = true;
-                    System.out.println("Depth of solution: " + currentChild.depth);
+                   // System.out.println("Depth of solution: " + currentChild.depth);
+                    stats.maxRecursion = currentChild.depth;
                     solutionPath(solutionPath, currentChild);
                 }
                     openList.add(0, currentChild);
@@ -43,7 +44,7 @@ public class DFS {
             }
         }
         stats.time = ((System.nanoTime() - startTime) / 1000000.0f);
-        System.out.println("Time: " + stats.time);
+        //System.out.println("Time: " + stats.time);
         return stats;
     }
     public boolean contains(ArrayList<Node> list, Node n){

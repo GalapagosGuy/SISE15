@@ -44,11 +44,11 @@ public class AStar extends Algorithm {
         else
             stats.solutionLength = -1;
 
-        System.out.println("Solution:");
-        DebugDraw(currentNode);
+        //System.out.println("Solution:");
+        //DebugDraw(currentNode);
 
         stats.time = (System.nanoTime() - startTime) / 1000.0f / 1000.0f;
-        System.out.println("Time: " + stats.time);
+        //System.out.println("Time: " + stats.time);
 
         stats.display();
         /*stats.time = TimeUnit.NANOSECONDS.toMillis(System.nanoTime() - startTime);

@@ -20,61 +20,47 @@ public class SISE15 {
             return;
         */
         //execute algorithm
-        Board boardForAStar = new Board("Puzzles/4x4_07_00155.txt");
+        Board boardForAStar = new Board("Puzzles/4x4_05_00001.txt");
         int[] puzzle4x4 = {
                 1, 2, 3, 4,
                 5, 6, 0 ,7,
                 9, 10, 11, 8,
                 13, 14, 15, 12,
         };
-        boardForAStar.showBoard();
+
+        String[] genericMoves = {
+                "RDUL", "RDLU", "DRUL", "DRLU", "LUDR", "LURD", "ULDR", "ULRD"
+        };
         float averageTime = 0.0f;
+        Stats stats = new Stats();
         for (int i = 0; i < 8; i++) {
-           Node rootNode = new Node(boardForAStar.getBoardFields(),4,4);
+            Node rootNode = new Node(boardForAStar.getBoardFields(), 4, 4);
             //Node rootNode = new Node(puzzle4x4,4,4);
             ArrayList<String> moves = new ArrayList<String>();
-            if( i == 0)
-                moves = movesConverstion("RDUL");
-            if( i == 1)
-                moves = movesConverstion("RDLU");
-            if( i == 2)
-                moves = movesConverstion("DRUL");
-            if( i == 3)
-                moves = movesConverstion("DRLU");
-            if( i == 4)
-                moves = movesConverstion("LUDR");
-            if( i == 5)
-                moves = movesConverstion("LURD");
-            if( i == 6)
-                moves = movesConverstion("ULDR");
-            if( i == 7)
-                moves = movesConverstion("ULRD");
-
-            DFS dfs = new DFS();
-            Stats stats = dfs.solve(rootNode, moves);
-            averageTime += stats.time;
+            moves = movesConverstion(genericMoves[i]);
+            BFS dfs = new BFS();
+            stats = dfs.solve(rootNode, moves);
             ArrayList<Node> solution = dfs.solutionPath;
 
-            if(solution.size() > 0){
-                System.out.println("Proccessed nodes: " + stats.processedNodes);
-                System.out.println("Visited nodes: " + stats.visitedNodes);
+            if (solution.size() > 0) {
+                stats.movesSet = genericMoves[i];
+                String solutionMoves = "";
                 for (int j = solution.size() - 1; j >= 0; j--) {
-                    System.out.print(solution.get(j).moves);
+                    solutionMoves += solution.get(j).moves;
                 }
-                System.out.println();
+                stats.moves = solutionMoves;
 
                 for (int j = solution.size() - 1; j >= 0; j--) {
-                   // solution.get(j).printOutPuzzle();
+                    //solution.get(j).printOutPuzzle();
                 }
-            }
-            else{
+            } else {
                 System.out.println("No solution was found");
             }
             solution.clear();
             moves.clear();
-
+            stats.display();
         }
-        System.out.println("Average Time:" + averageTime/8.0f);
+
 
         AStar astar = new AStar();
         astar.solve(boardForAStar, "hamm");

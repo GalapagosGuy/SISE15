@@ -25,9 +25,10 @@ public class BFS {
             for (int i = 0; i < currentNode.children.size() ; i++) {
                 Node currentChild = currentNode.children.get(i);
                 if(currentChild.checkCorectenss()){
-                    System.out.println("Solution found");
+                    //System.out.println("Solution found");
                     solutionFound = true;
-                    System.out.println("Depth of solution: " + currentChild.depth);
+                    //System.out.println("Depth of solution: " + currentChild.depth);
+                    stats.maxRecursion = currentChild.depth;
                     solutionPath(solutionPath, currentChild);
                 }
                 if(!contains(openList, currentChild) && !contains(closedList, currentChild)){
@@ -38,7 +39,7 @@ public class BFS {
             }
         }
         stats.time = (System.nanoTime() - startTime) / 1000.0f / 1000.0f;
-        System.out.println("Time: " + stats.time);
+        //System.out.println("Time: " + stats.time);
         return stats;
     }
 
