@@ -170,10 +170,10 @@ public class AStar extends Algorithm {
     private void calculatePattern(Node lastNode) {
 
         int iterator = 0;
-        Node previousNode = lastNode.parent;
+        Node previousNode = lastNode;
         StringBuilder sb = new StringBuilder();
 
-        while(previousNode != null) {
+        while(previousNode.parent != null) {
             iterator++;
             sb.append(previousNode.moves);
             previousNode = previousNode.parent;
