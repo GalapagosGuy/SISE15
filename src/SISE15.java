@@ -35,13 +35,13 @@ public class SISE15 {
                 Board board = new Board(fileName);
                 //board.showBoard();
 
-                Algorithm algorithm = prepareAlgorithm("dfs");
+                Algorithm algorithm = prepareAlgorithm("bfs");
 
                 if (algorithm == null)
                     return;
 
                 //execute algorithm
-                Stats statsResult = algorithm.solve(new Board(fileName), "DRLU");
+                Stats statsResult = algorithm.solve(new Board(fileName), "LUDR");
                 //System.out.println(statsResult.time);
                 //System.out.println(statsResult.solutionLength);
                 bigStats.solutionLength += statsResult.solutionLength;
@@ -77,7 +77,7 @@ public class SISE15 {
         float time = bigStats.time * 1.0f /  (float)indexFile;
 
         try {
-            FileWriter additionalInfoResult = new FileWriter("4x4_01_dfs_DRLU_stats.txt");
+            FileWriter additionalInfoResult = new FileWriter("4x4_01_bfs_LUDR_stats.txt");
 
             if (solutionLength == 0 || solutionLength == -1)
                 additionalInfoResult.write("-1");
