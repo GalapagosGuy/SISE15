@@ -56,7 +56,7 @@ public class BFS extends  Algorithm{
         }
 
         stats.time = (System.nanoTime() - startTime) / 1000.0f / 1000.0f;
-        stats.display();
+        //stats.display();
         return stats;
     }
 

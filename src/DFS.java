@@ -63,7 +63,7 @@ public class DFS extends Algorithm{
             System.out.println("No solution was found");
         }
         stats.time = ((System.nanoTime() - startTime) / 1000000.0f);
-        stats.display();
+        //stats.display();
         //System.out.println("Time: " + stats.time);
         return stats;
     }
