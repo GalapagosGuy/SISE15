@@ -29,8 +29,9 @@ public class SISE15 {
         };
 
 
-        Node rootNode = new Node(boardForAStar.getBoardFields(),4,4);
+
         for (int i = 0; i < 8 ; i++) {
+            Node rootNode = new Node(boardForAStar.getBoardFields(),4,4);
             ArrayList<String> moves = new ArrayList<String>();
             if( i == 0)
                 moves = movesConverstion("RDUL");
@@ -49,8 +50,8 @@ public class SISE15 {
             if( i == 7)
                 moves = movesConverstion("ULRD");
 
-            DFS bfs = new DFS();
-            ArrayList<Node> solution = bfs.solve(rootNode, moves);
+            DFS dfs = new DFS();
+            ArrayList<Node> solution = dfs.solve(rootNode, moves);
 
             if(solution.size() > 0){
 
