@@ -39,11 +39,18 @@ public class AStar extends Algorithm {
             openList.remove(currentNode);
         }
 
+        if (solutionFound)
+            calculatePattern(currentNode);
+        else
+            stats.solutionLength = -1;
+
         System.out.println("Solution:");
         DebugDraw(currentNode);
 
-        stats.time = Math.round((System.nanoTime() - startTime) / 1000.0f) / 1000.0f;
+        stats.time = (System.nanoTime() - startTime) / 1000.0f / 1000.0f;
         System.out.println("Time: " + stats.time);
+
+        stats.display();
         /*stats.time = TimeUnit.NANOSECONDS.toMillis(System.nanoTime() - startTime);
         System.out.println("Time nano: " + (System.nanoTime() - startTime));
         System.out.println("Time mili: " + stats.time);*/
@@ -60,12 +67,15 @@ public class AStar extends Algorithm {
     }
 
     private void checkNode(Node node) {
+        stats.maxRecursion = stats.maxRecursion < node.depth ? node.depth : stats.maxRecursion;
 
         if (checkSolution(node))
             return;
 
 
         node.nextLayer();
+
+        stats.processedNodes++;
 
         for (Node neighbour : node.children) {
             processNode(neighbour);
@@ -92,7 +102,7 @@ public class AStar extends Algorithm {
         int nodeWithLowestHeuristicScore = 0;
 
         for (int i = 1; i < openList.size(); i++)
-            if (openList.get(i).heuristicScore < openList.get(i).heuristicScore)
+            if (openList.get(i).heuristicScore < openList.get(nodeWithLowestHeuristicScore).heuristicScore)
                 nodeWithLowestHeuristicScore = i;
 
         return openList.get(nodeWithLowestHeuristicScore);
@@ -106,6 +116,8 @@ public class AStar extends Algorithm {
             node.heuristicScore += useHamming ? hammingScore(node) : manhattanScore(node);
 
             openList.add(node);
+
+            stats.visitedNodes++;
         }
 
     }
@@ -134,11 +146,11 @@ public class AStar extends Algorithm {
 
             int finalPositionInArray = findFinalPositionInArrayByValue(node, node.puzzle[i]);
 
-            int finalX = (int)(finalPositionInArray / node.rows);
-            int finalY = (int)(finalPositionInArray / node.columns);
+            int finalX = (int)(finalPositionInArray % node.rows);
+            int finalY = (int)(finalPositionInArray / node.rows);
 
-            int currentFieldX = (int)(i / node.rows);
-            int currentFieldY = (int)(i / node.columns);
+            int currentFieldX = (int)(i % node.rows);
+            int currentFieldY = (int)(i / node.rows);
 
             score += Math.abs(finalX - currentFieldX) + Math.abs(finalY - currentFieldY);
         }
@@ -153,6 +165,20 @@ public class AStar extends Algorithm {
         }
 
         return node.puzzle.length - 1;
+    }
+
+    private void calculatePattern(Node lastNode) {
+
+        int iterator = 0;
+        Node previousNode = lastNode.parent;
+
+        while(previousNode != null) {
+            iterator++;
+            previousNode = previousNode.parent;
+        }
+
+        stats.solutionLength = iterator;
+
     }
 
 }

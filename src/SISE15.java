@@ -20,7 +20,7 @@ public class SISE15 {
             return;
         */
         //execute algorithm
-        Board boardForAStar = new Board("Puzzles/4x4_05_00005.txt");
+        Board boardForAStar = new Board("Puzzles/4x4_07_00150.txt");
         int[] puzzle4x4 = {
                 1, 2, 3, 4,
                 5, 6, 0 ,7,
@@ -75,18 +75,6 @@ public class SISE15 {
 
         }
         System.out.println("Average Time:" + averageTime/8.0f);
-
-        int[] generated = {
-                1, 2, 3, 0,
-                5, 6, 7, 4,
-                9, 11, 12, 8,
-                13, 10, 14, 15,
-        };
-
-        boardForAStar.setEmptyField(3);
-        boardForAStar.setBoardFields(generated);
-        boardForAStar.setHeight(4);
-        boardForAStar.setWidth(4);
 
         AStar astar = new AStar();
         astar.solve(boardForAStar, "hamm");
