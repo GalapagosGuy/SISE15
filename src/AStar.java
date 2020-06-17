@@ -1,11 +1,5 @@
 import java.util.ArrayList;
 
-/* useful links
-https://algorithmsinsight.wordpress.com/graph-theory-2/a-star-in-general/implementing-a-star-to-solve-n-puzzle/
-https://blog.goodaudience.com/solving-8-puzzle-using-a-algorithm-7b509c331288
-http://csis.pace.edu/~benjamin/teaching/cs627/webfiles/Astar.pdf
-*/
-
 public class AStar  extends  Algorithm{
 
     public boolean useHamming = true;
@@ -111,10 +105,6 @@ public class AStar  extends  Algorithm{
         if (node != null && !contains(closedList, node)) {
 
             node.heuristicScore = 0;
-
-            //if (useHamming)
-            //    node.heuristicScore = node.depth;
-
             node.heuristicScore += useHamming ? hammingScore(node) : manhattanScore(node);
 
             openList.add(node);

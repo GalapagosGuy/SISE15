@@ -10,14 +10,12 @@ public class Board {
     private int[] boardFields;
 
     public Board(String sourceFilePath) {
-        System.out.println("Board: " + sourceFilePath);
         this.prepare(sourceFilePath);
     }
 
     private void prepare(String sourceFilePath) {
 
         try {
-            System.out.println(sourceFilePath);
             Scanner scanner = new Scanner(new File(sourceFilePath));
 
             if (scanner.hasNextInt())
